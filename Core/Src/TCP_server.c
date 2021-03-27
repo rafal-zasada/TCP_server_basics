@@ -49,12 +49,13 @@ void StartTCPserverTask(void *argument)
 
 						// debug start
 						// print whole input buffer
-						snprintf(GUI_buffer, sizeof(GUI_buffer), "\n\n%s \n\n ", buf);		// buf is not \0 terminated hence need to use buflen for UART transmit !
-						HAL_UART_Transmit(&huart3, (unsigned char*)&GUI_buffer , buflen, 200); //
+		//				snprintf(GUI_buffer, sizeof(GUI_buffer), "\n\n%s \n\n ", buf);		// buf is not \0 terminated hence need to use buflen for UART transmit !
+		//				HAL_UART_Transmit(&huart3, (unsigned char*)&GUI_buffer , buflen, 200); //
 
 						
-						char *ServerResponse = "\n\nHello internet\n\n";
+						char *ServerResponse = "\n\nServer response: Hello internet!!!\n\n";
 
+						netconn_write(NewConnection, (signed char*)buf, buflen, NETCONN_NOCOPY);
 						netconn_write(NewConnection, (signed char*)ServerResponse, strlen(ServerResponse), NETCONN_NOCOPY);
 					}
 
